@@ -68,7 +68,6 @@ export class PostListComponent implements OnInit {
     });
 
     this.store.dispatch(fromPosts.getPosts());
-    console.log('Valore di this.currentPage:', this.currentPage);
     this.pagedPosts$ = this.getPagedPosts();
 
   }
@@ -78,7 +77,6 @@ export class PostListComponent implements OnInit {
       map((posts) => {
         const startIndex = (this.currentPage - 1) * this.postsPerPage;
         const endIndex = startIndex + this.postsPerPage;
-        console.log('paged posts', startIndex, endIndex);
         return posts.slice(startIndex, endIndex);
       })
     );

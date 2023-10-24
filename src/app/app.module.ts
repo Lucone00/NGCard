@@ -21,8 +21,6 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { PostStoreModule } from './store/post/post-store.module';
-
 
 @NgModule({
   declarations: [
@@ -49,7 +47,6 @@ import { PostStoreModule } from './store/post/post-store.module';
     StoreModule.forRoot(),
     EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument({}),
-    PostStoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { IPost } from '../interfaces/post.interface';
 import { PostResponse } from '../interfaces/post.interface';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -20,8 +19,18 @@ export class PostService {
   }
 
   getPost(): Observable<IPost[]> {
-    console.log('getPost() service method is called');
-    return this.http.get<IPost[]>(this.url + '.json');
+    return this.http.get<any>(this.url + '.json').pipe(
+      map((jsonPost) => {
+        return Object.values(jsonPost).map((jsonPost: any) => {
+          const postObj: IPost = {
+            id: jsonPost.id,
+            title: jsonPost.title,
+            body: jsonPost.body,
+          };
+          return postObj;
+        });
+      })
+    );
   }
 
   getPostById(id: string): Observable<IPost> {
